@@ -1,0 +1,33 @@
+{
+  "skill_name": "neurorad-pipeline",
+  "evals": [
+    {
+      "id": 1,
+      "name": "find-files",
+      "prompt": "neurorad — where's the script that does brain extraction and what arguments does it take?",
+      "expected_output": "Claude identifies `brain_extraction.md` as the relevant reference and names the script as `~/imaging-scripts/runpipeline.sh brainx $SUBJECT`, run as RAM_maint, requiring $RAMROOT to be exported. Should mention the BRAIN argument gets passed to the subsequent wholebrainseg.sh run.",
+      "files": []
+    },
+    {
+      "id": 2,
+      "name": "interpret-script",
+      "prompt": "neurorad — read runpipeline.sh and explain what the `norm` subcommand actually does under the hood. Which tools does it call?",
+      "expected_output": "Claude reads runpipeline.sh (either from ~RAM_maint/imaging-scripts/ on rhino or from github.com/pennmem/imaging-scripts as fallback), discloses the source, explains the `norm` branch, names any helper scripts it dispatches to (likely an ANTs wrapper), and tags the explanation as interpretation with a confidence score out of 10.",
+      "files": []
+    },
+    {
+      "id": 3,
+      "name": "walkthrough",
+      "prompt": "I just got imaging for R1999X. Walk me through steps 0–3 of the pipeline assuming I'm running as RAM_maint on rhino2.",
+      "expected_output": "Claude walks through: Step 0 jacksheet/docs setup, Step 1 DICOM→NIfTI conversion with standard filenames, Step 2 FreeSurfer recon-all with the recon-all command, Step 3 the three parallel jobs (NORM, MTL_SEG, WHOLE_BRAIN) with BrainX first. Each command is annotated with the account (RAM_maint for most). Tells the user to export SUBJECT=R1999X and RAMROOT themselves.",
+      "files": []
+    },
+    {
+      "id": 4,
+      "name": "debug",
+      "prompt": "My whole-brain segmentation has labels floating below the brain, like there are spots of wrong labels in mid-air under the cerebellum. What happened and how do I fix it?",
+      "expected_output": "Claude matches the symptom to the failure-modes table: neck/face tissue pulled the atlas registration off. Prescribes running BrainX first (brain_extraction.md) and then rerunning wholebrainseg.sh $SUBJECT BRAIN. Proposes the commands but does not execute them. References both brain_extraction.md and whole_brain_pipeline.md.",
+      "files": []
+    }
+  ]
+}
