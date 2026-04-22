@@ -1,0 +1,160 @@
+% ============================================================================
+% CML Beamer Template
+% Matches the visual style used in Computational Memory Lab lectures
+% (Madrid theme + navy blue + lab-branded footer).
+%
+% Variables to fill in (look for <<...>> markers):
+%   <<TITLE>>       main talk title
+%   <<SUBTITLE>>    optional subtitle (delete the \subtitle line if unused)
+%   <<AUTHOR>>      presenter name(s)
+%   <<DATE>>        defaults to today
+%   <<SHORT_TITLE>> short version shown in footer (max ~5 words)
+%
+% Use \section{...} for each major section. Each section auto-updates the
+% navigation dots shown in the Madrid header.
+%
+% For multi-paper talks, typical structure:
+%   \section{Paper 1}
+%   \section{Paper 2}
+%   \section{Comparison}
+%
+% For figures, drop files into a `figures/` directory next to this .tex file
+% and reference relatively: \includegraphics[width=...]{figures/myfig.pdf}
+% ============================================================================
+
+\documentclass[aspectratio=169]{beamer}
+
+% --- Theme -------------------------------------------------------------------
+\usetheme{Madrid}
+\usecolortheme{default}
+
+% CML navy blue — the shade used in the BigData_ML_Lecture reference
+\definecolor{cmlblue}{RGB}{28, 53, 115}
+% On Madrid, recoloring `structure` + the palette cascades cleanly to the
+% title banner, the headline strip, the footer, and frame titles — without
+% the title-text ending up the same color as its background. Don't override
+% individual elements (title, frametitle) here unless you're willing to
+% double-check that fg and bg haven't collided.
+\setbeamercolor{structure}{fg=cmlblue}
+\setbeamercolor{palette primary}{bg=cmlblue, fg=white}
+\setbeamercolor{palette secondary}{bg=cmlblue!80, fg=white}
+\setbeamercolor{palette tertiary}{bg=cmlblue!60, fg=white}
+
+% --- Packages ---------------------------------------------------------------
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\hypersetup{colorlinks=true, linkcolor=cmlblue, urlcolor=cmlblue, citecolor=cmlblue!70}
+\usepackage[round, authoryear]{natbib}
+% Bibliography is loaded via \bibliography{} in the References frame near
+% the end of the document. Natbib + bibtex works out of the box on any
+% TeX Live install. Citation commands: \citet{key}, \citep{key}, \citeauthor{key}.
+
+% --- Notes configuration ----------------------------------------------------
+% Two compile modes:
+%   default: talk-facing (notes hidden)
+%   uncomment the show-only-notes line + recompile for a notes-only handout
+\setbeameroption{hide notes}
+% \setbeameroption{show only notes}
+
+% --- Metadata ---------------------------------------------------------------
+\title[<<SHORT_TITLE>>]{<<TITLE>>}
+\subtitle{<<SUBTITLE>>}
+\author[<<AUTHOR>>]{<<AUTHOR>>}
+\institute[Penn CML]{Computational Memory Lab \\ University of Pennsylvania}
+\date{<<DATE>>}
+
+% ============================================================================
+\begin{document}
+
+% --- Title slide -----------------------------------------------------------
+\begin{frame}[plain]
+  \titlepage
+\end{frame}
+
+% --- Outline ---------------------------------------------------------------
+\begin{frame}{Outline}
+  \tableofcontents
+\end{frame}
+
+% ============================================================================
+% Sections begin here. Replace the templates below with actual content.
+% ============================================================================
+
+\section{Motivation}
+
+\begin{frame}{Why this matters}
+  \begin{itemize}
+    \item Key point 1 framed for the audience
+    \item Key point 2 — why the existing answer is insufficient
+    \item What this talk adds
+  \end{itemize}
+  \note{Set the stakes. Keep to 45 seconds. The audience should
+        know by the end of this slide what question the talk answers.}
+\end{frame}
+
+\section{Background}
+
+\begin{frame}{Prior work}
+  \begin{itemize}
+    \item Existing model / result that everyone knows
+    \item Specific gap or puzzle we're addressing
+  \end{itemize}
+  \note{}
+\end{frame}
+
+\section{Methods}
+
+\begin{frame}{Experimental design}
+  % Figure placeholder — replace with actual figure from bundle
+  % \includegraphics[width=0.9\textwidth]{figures/design.pdf}
+  \begin{itemize}
+    \item Participants: N = ?
+    \item Task: ?
+    \item Key analyses: ?
+  \end{itemize}
+  \note{}
+\end{frame}
+
+\section{Results}
+
+\begin{frame}{Headline finding}
+  \begin{columns}
+    \column{0.6\textwidth}
+      % \includegraphics[width=\textwidth]{figures/fig_main.pdf}
+    \column{0.4\textwidth}
+      \begin{itemize}
+        \item What the figure shows
+        \item Why it's surprising / confirmatory
+      \end{itemize}
+  \end{columns}
+  \note{The punchline slide. Don't talk to the bullets — talk to the
+        figure. The bullets are just for the audience's eyes.}
+\end{frame}
+
+\section{Discussion}
+
+\begin{frame}{Implications}
+  \begin{itemize}
+    \item What this changes about our understanding
+    \item Open question for future work
+  \end{itemize}
+  \note{}
+\end{frame}
+
+% --- Acknowledgments -------------------------------------------------------
+\begin{frame}{Acknowledgments}
+  \begin{itemize}
+    \item Collaborators, funding sources
+  \end{itemize}
+\end{frame}
+
+% --- References -----------------------------------------------------------
+\begin{frame}[allowframebreaks]{References}
+  \bibliographystyle{apalike}
+  \bibliography{references}
+\end{frame}
+
+\end{document}
