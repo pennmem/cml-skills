@@ -1,0 +1,167 @@
+% ============================================================================
+% CML Beamerposter Template
+% Matches the visual style of CML Beamer decks (Madrid theme + navy blue).
+% Designed for standard 48x36 landscape conference posters.
+%
+% Variables to fill in (look for <<...>> markers):
+%   <<TITLE>>          main poster title (can be 1 or 2 lines)
+%   <<AUTHORS>>        presenter names with superscript affiliation markers
+%   <<AFFILIATIONS>>   matching superscript-numbered affiliations
+%   <<VENUE>>          conference or meeting name (optional; can be blank)
+%
+% Change poster size by editing the beamerposter \usepackage options.
+% Size presets:
+%   48x36 landscape (US default): width=121.9, height=91.4
+%   36x48 portrait:               width=91.4,  height=121.9
+%   A0 portrait:                  size=a0, orientation=portrait (no width/height)
+%   A0 landscape:                 size=a0, orientation=landscape
+%
+% Column count: this template assumes 3 columns. For 2 columns change all
+% \begin{column}{0.32\textwidth} to {0.48\textwidth}.
+% ============================================================================
+
+\documentclass[final]{beamer}
+\usepackage[orientation=landscape,size=custom,width=121.9,height=91.4,scale=1.35]{beamerposter}
+
+% --- Theme ------------------------------------------------------------------
+\usetheme{Madrid}
+\usecolortheme{default}
+
+% CML navy blue — same shade as the Beamer template
+\definecolor{cmlblue}{RGB}{28, 53, 115}
+\setbeamercolor{structure}{fg=cmlblue}
+\setbeamercolor{palette primary}{bg=cmlblue, fg=white}
+\setbeamercolor{palette secondary}{bg=cmlblue!80, fg=white}
+\setbeamercolor{palette tertiary}{bg=cmlblue!60, fg=white}
+
+% Make block titles more prominent on a poster than they are on slides
+\setbeamercolor{block title}{fg=white, bg=cmlblue}
+\setbeamercolor{block body}{fg=black, bg=cmlblue!5}
+\setbeamerfont{block title}{series=\bfseries, size=\Large}
+
+% beamerposter with Madrid already hides navigation chrome — don't override
+% \setbeamertemplate{navigation symbols}{}, \footline, or \headline here.
+% Those overrides confuse beamerposter's page-geometry calculation and
+% trigger "Illegal unit of measure" warnings at \end{frame}.
+
+% --- Packages ---------------------------------------------------------------
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{helvet}  % scalable Helvetica-compatible sans — the conventional poster font
+\renewcommand{\familydefault}{\sfdefault}  % use sans as body default
+\usepackage{amsmath, amssymb}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{tcolorbox}
+\tcbuselibrary{skins}
+% \usepackage{qrcode}  % uncomment if including a QR code
+
+% Spacing in blocks — posters breathe better with a bit more gap
+\setlength{\parskip}{0.5em}
+\setlength{\itemsep}{0.3em}
+
+% ============================================================================
+\begin{document}
+
+\begin{frame}[t]{}
+
+% --- Title header (full-width banner) ---------------------------------------
+\begin{tcolorbox}[colback=cmlblue, colframe=cmlblue, arc=5pt,
+                  boxsep=12pt, left=20pt, right=20pt, top=8pt, bottom=8pt]
+  \begin{center}
+    {\fontsize{80}{96}\selectfont\bfseries\color{white} <<TITLE>>} \\[0.5em]
+    {\Large\color{white} <<AUTHORS>>} \\[0.3em]
+    {\normalsize\color{white} <<AFFILIATIONS>>}
+  \end{center}
+\end{tcolorbox}
+\vspace{1.5em}
+
+% --- Three columns ---------------------------------------------------------
+\begin{columns}[T]
+
+% ==================== COLUMN 1: Setup =====================================
+\begin{column}{0.32\textwidth}
+
+\begin{block}{Motivation}
+  [TODO — 40-80 words. Lead with the phenomenon or puzzle. Don't open
+  with a literature review.]
+\end{block}
+
+\begin{block}{Question}
+  \begin{center}
+    \bfseries [TODO — one-sentence research question, visually emphasized.]
+  \end{center}
+\end{block}
+
+\begin{block}{Methods}
+  [TODO — 50-100 words. Task, N, key DV. Prefer a schematic figure
+  with 1-2 sentences to prose-heavy description.]
+
+  % \begin{center}
+  %   \includegraphics[width=0.95\textwidth]{figures/design.pdf}
+  % \end{center}
+\end{block}
+
+\end{column}
+
+% ==================== COLUMN 2: Results ===================================
+\begin{column}{0.32\textwidth}
+
+\begin{block}{[TODO — takeaway-style heading for Result 1]}
+  \begin{center}
+    % \includegraphics[width=0.95\textwidth]{figures/fig1.pdf}
+    [TODO — figure placeholder]
+  \end{center}
+  \vspace{0.3em}
+  {\small [TODO — 30-80 words. Tell the viewer what to notice and what
+  it means. Don't just paraphrase the original caption.]}
+\end{block}
+
+\begin{block}{[TODO — takeaway-style heading for Result 2]}
+  \begin{center}
+    % \includegraphics[width=0.95\textwidth]{figures/fig2.pdf}
+    [TODO — figure placeholder]
+  \end{center}
+  \vspace{0.3em}
+  {\small [TODO — interpretation.]}
+\end{block}
+
+\end{column}
+
+% ==================== COLUMN 3: Results + Close ===========================
+\begin{column}{0.32\textwidth}
+
+\begin{block}{[TODO — takeaway-style heading for Result 3]}
+  \begin{center}
+    % \includegraphics[width=0.95\textwidth]{figures/fig3.pdf}
+    [TODO — figure placeholder]
+  \end{center}
+  \vspace{0.3em}
+  {\small [TODO — interpretation.]}
+\end{block}
+
+\begin{block}{Conclusions}
+  \begin{itemize}
+    \item {[TODO — complete-sentence claim \#1.]}
+    \item {[TODO — complete-sentence claim \#2.]}
+    \item {[TODO — complete-sentence claim \#3.]}
+  \end{itemize}
+\end{block}
+
+\begin{block}{References \& Acknowledgments}
+  {\scriptsize
+    \textbf{References:}\par
+    {}[1] Howard, M.W. \& Kahana, M.J. (2002). \textit{J Math Psych}, 46, 269--299.\par
+    {}[2] Polyn, S.M. et al. (2009). \textit{Psych Rev}, 116, 129--156.\par
+    \vspace{0.5em}
+    \textbf{Acknowledgments:} Supported by [TODO — grant numbers].
+    Contact: \texttt{[TODO — email]}.
+  }
+\end{block}
+
+\end{column}
+
+\end{columns}
+
+\end{frame}
+\end{document}
