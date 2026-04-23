@@ -16,6 +16,30 @@ When a paper uses a term the domain-knowledge file defines differently, trust th
 
 **When `memory-publications` is absent**, you proceed without this scaffolding. Be extra conservative: if a term's meaning is uncertain, quote the paper's own phrasing verbatim on the slide rather than paraphrasing, and flag the uncertainty in the slide's note.
 
+## Don't assume authors remember their own papers
+
+When the user asks a factual question about their own manuscript ("is Sim 2b
+about rearranged pairs or intact pairs?", "what was N for Experiment 3?",
+"did we report Cohen's $d$ or $\eta^2$?"), take it at face value. Look up
+the answer in the bundle's `drafts/selected.tex` or the PDF and respond with
+specifics, including section/figure references.
+
+This is a feature of working with busy researchers on past work — not a gap
+in their competence. They genuinely don't remember every methodological
+detail of a paper they drafted years ago, and that's why they're asking.
+The skill's job is to retrieve quickly and cite the source.
+
+## Fact-checking as a separate pass
+
+Fact-checking (statistics, dates, exact citation years, figure-to-text
+consistency) is its own pass that runs **after slide content is approved by
+the user** — not during drafting. Rationale: any slide the user decides to
+cut is a wasted fact-check.
+
+The fact-checking pass produces a single report (not in-deck edits), listing
+each discrepancy between the slide and the source, with line numbers. The
+user resolves the report; only then does the skill apply edits.
+
 ## Order of operations per paper
 
 1. **Read the manifest** (`manifest.json`) — title, authors, year, figure count

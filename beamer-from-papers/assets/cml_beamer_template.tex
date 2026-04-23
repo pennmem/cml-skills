@@ -1,7 +1,9 @@
 % ============================================================================
-% CML Beamer Template
-% Matches the visual style used in Computational Memory Lab lectures
-% (Madrid theme + navy blue + lab-branded footer).
+% CML Beamer Template (metropolis default, Madrid fallback)
+%
+% Default theme is `metropolis` — clean, minimal, and matches the visual
+% philosophy of recent CML talks. For the older Madrid + navy-blue CML house
+% style, swap the theme block where indicated.
 %
 % Variables to fill in (look for <<...>> markers):
 %   <<TITLE>>       main talk title
@@ -10,52 +12,96 @@
 %   <<DATE>>        defaults to today
 %   <<SHORT_TITLE>> short version shown in footer (max ~5 words)
 %
-% Use \section{...} for each major section. Each section auto-updates the
-% navigation dots shown in the Madrid header.
+% Sections use `\section{...}`. `metropolis` section dividers are suppressed
+% by default (`sectionpage=none`); enable them if the talk is long and needs
+% visual chapter breaks.
 %
 % For multi-paper talks, typical structure:
 %   \section{Paper 1}
 %   \section{Paper 2}
 %   \section{Comparison}
 %
-% For figures, drop files into a `figures/` directory next to this .tex file
-% and reference relatively: \includegraphics[width=...]{figures/myfig.pdf}
+% For figures: drop files into a `figures/` directory next to this .tex and
+% reference relatively: \includegraphics[width=...]{figures/myfig.pdf}.
+% For DATA figures, prefer TikZ recreations over \includegraphics — see
+% references/visual_design.md.
 % ============================================================================
 
-\documentclass[aspectratio=169]{beamer}
+\documentclass[aspectratio=169,11pt]{beamer}
 
-% --- Theme -------------------------------------------------------------------
-\usetheme{Madrid}
-\usecolortheme{default}
+% --- Theme (default: metropolis) --------------------------------------------
+\usetheme{metropolis}
+\metroset{sectionpage=none,progressbar=frametitle}
 
-% CML navy blue — the shade used in the BigData_ML_Lecture reference
+% CML accent color — used for \alert, section text, links, \novelbadge.
 \definecolor{cmlblue}{RGB}{28, 53, 115}
-% On Madrid, recoloring `structure` + the palette cascades cleanly to the
-% title banner, the headline strip, the footer, and frame titles — without
-% the title-text ending up the same color as its background. Don't override
-% individual elements (title, frametitle) here unless you're willing to
-% double-check that fg and bg haven't collided.
-\setbeamercolor{structure}{fg=cmlblue}
-\setbeamercolor{palette primary}{bg=cmlblue, fg=white}
-\setbeamercolor{palette secondary}{bg=cmlblue!80, fg=white}
-\setbeamercolor{palette tertiary}{bg=cmlblue!60, fg=white}
+\definecolor{novelred}{RGB}{176, 0, 32}
+\setbeamercolor{alerted text}{fg=novelred}
+\setbeamercolor{progress bar}{fg=cmlblue}
+\setbeamercolor{frametitle}{bg=cmlblue}
+
+% --- Madrid fallback (uncomment the block below + comment out metropolis) ---
+%\usetheme{Madrid}
+%\usecolortheme{default}
+%\setbeamercolor{structure}{fg=cmlblue}
+%\setbeamercolor{palette primary}{bg=cmlblue, fg=white}
+%\setbeamercolor{palette secondary}{bg=cmlblue!80, fg=white}
+%\setbeamercolor{palette tertiary}{bg=cmlblue!60, fg=white}
 
 % --- Packages ---------------------------------------------------------------
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
 \usepackage{amsmath, amssymb, amsthm}
 \usepackage{graphicx}
+\usepackage{setspace}
+\usepackage{xcolor}
+\usepackage{xstring}
+\usepackage{tikz}
+\usetikzlibrary{positioning, arrows.meta, fit, backgrounds, shapes.geometric}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.17}
 \usepackage{hyperref}
 \hypersetup{colorlinks=true, linkcolor=cmlblue, urlcolor=cmlblue, citecolor=cmlblue!70}
 \usepackage[round, authoryear]{natbib}
-% Bibliography is loaded via \bibliography{} in the References frame near
-% the end of the document. Natbib + bibtex works out of the box on any
-% TeX Live install. Citation commands: \citet{key}, \citep{key}, \citeauthor{key}.
+% Bibliography: natbib + bibtex works on any TeX Live. Load via \bibliography{}
+% in the References frame near the end. Commands: \citet{}, \citep{}, \citeauthor{}.
+
+% --- Typography: tighten default line spacing -------------------------------
+% Beamer's default leading wastes vertical real estate. Tighten it.
+\setstretch{0.95}
+
+% --- Novelty macro ----------------------------------------------------------
+% Use \novelbadge in a frame title to mark NEW mechanisms/results:
+%   \begin{frame}{Intrusive recollection \novelbadge}
+\newcommand{\novelbadge}{%
+  \hfill{\color{novelred}\scriptsize\textbf{[NEW]}}%
+}
+
+% --- Recurring visual motif: memory-state diagram ---------------------------
+% Toggle emphasis on the two CMR pathways (M^{FC}, M^{CF}) across slides so
+% the audience builds recognition without prose. Usage:
+%   \memorydiagram{active}{inactive}      % emphasize feature->context only
+%   \memorydiagram{inactive}{active}      % emphasize context->feature only
+%   \memorydiagram{active}{active}        % both pathways engaged (retrieval loop)
+\newcommand{\mdstyle}[1]{%
+  \IfStrEq{#1}{active}{thick, cmlblue, -{Latex[length=3mm]}}%
+                      {thin, black!35, -{Latex[length=2mm]}}%
+}
+\newcommand{\memorydiagram}[2]{%
+  \begin{tikzpicture}[every node/.style={font=\small},
+                      box/.style={draw, rounded corners, minimum width=2.2cm,
+                                  minimum height=0.8cm, align=center}]
+    \node[box] (f) {Items $\mathbf{f}$};
+    \node[box, right=3cm of f] (c) {Context $\mathbf{c}$};
+    \draw[\mdstyle{#1}, bend left=25] (f) to node[above] {$M^{FC}$} (c);
+    \draw[\mdstyle{#2}, bend left=25] (c) to node[below] {$M^{CF}$} (f);
+  \end{tikzpicture}%
+}
 
 % --- Notes configuration ----------------------------------------------------
 % Two compile modes:
 %   default: talk-facing (notes hidden)
-%   uncomment the show-only-notes line + recompile for a notes-only handout
+%   notes-only: \setbeameroption{show only notes}
 \setbeameroption{hide notes}
 % \setbeameroption{show only notes}
 
@@ -80,68 +126,76 @@
 \end{frame}
 
 % ============================================================================
-% Sections begin here. Replace the templates below with actual content.
+% Sections begin here. Replace templates with actual content. Cardinal rule:
+% the speaker provides the words; the slides provide the visuals.
+% Anything that would be a full sentence on a slide belongs in \note{...}.
 % ============================================================================
 
 \section{Motivation}
 
 \begin{frame}{Why this matters}
+  % Visual-first: ideally a figure/diagram lives here. Keep bullets to 2-4
+  % short phrases (not sentences). Full narrative in \note{}.
   \begin{itemize}
-    \item Key point 1 framed for the audience
-    \item Key point 2 — why the existing answer is insufficient
+    \item Phenomenon the audience recognizes
+    \item Specific gap in existing accounts
     \item What this talk adds
   \end{itemize}
-  \note{Set the stakes. Keep to 45 seconds. The audience should
-        know by the end of this slide what question the talk answers.}
-\end{frame}
-
-\section{Background}
-
-\begin{frame}{Prior work}
-  \begin{itemize}
-    \item Existing model / result that everyone knows
-    \item Specific gap or puzzle we're addressing
-  \end{itemize}
-  \note{}
-\end{frame}
-
-\section{Methods}
-
-\begin{frame}{Experimental design}
-  % Figure placeholder — replace with actual figure from bundle
-  % \includegraphics[width=0.9\textwidth]{figures/design.pdf}
-  \begin{itemize}
-    \item Participants: N = ?
-    \item Task: ?
-    \item Key analyses: ?
-  \end{itemize}
-  \note{}
+  \note{
+    Full 1--2 minute opening. Set the stakes with a concrete phenomenon
+    (not "memory is important"). State the gap: what does current theory
+    miss? State the contribution: what does this work add, in one
+    sentence the audience can repeat. Avoid filler ("importantly",
+    "interestingly"). Anticipate the question: why now?
+  }
 \end{frame}
 
 \section{Results}
 
-\begin{frame}{Headline finding}
-  \begin{columns}
-    \column{0.6\textwidth}
-      % \includegraphics[width=\textwidth]{figures/fig_main.pdf}
-    \column{0.4\textwidth}
-      \begin{itemize}
-        \item What the figure shows
-        \item Why it's surprising / confirmatory
-      \end{itemize}
-  \end{columns}
-  \note{The punchline slide. Don't talk to the bullets — talk to the
-        figure. The bullets are just for the audience's eyes.}
+\begin{frame}{Headline finding \novelbadge}
+  % Prefer TikZ for data figures; see references/visual_design.md.
+  % Fallback: \includegraphics of a published figure with simplified layout.
+  \centering
+  \includegraphics[width=0.78\textwidth]{figures/fig_main.pdf}
+  \note{
+    Walk the figure, not the bullets. Name the axes, call out the
+    comparison, report the effect size. Say why this result is the
+    paper's punchline. Flag the audience-expected objection and
+    preview how a later slide addresses it.
+  }
+\end{frame}
+
+\begin{frame}{Results summary}
+  % Summary-table-then-deep-dive pattern: one table listing all results,
+  % then 2--3 deep-dive slides on the architecturally important ones.
+  \small
+  \renewcommand{\arraystretch}{1.15}
+  \begin{tabular}{lll}
+    \textbf{Phenomenon} & \textbf{Source} & \textbf{Mechanism} \\
+    \hline
+    Effect A            & Exp.~1          & Pre-existing        \\
+    Effect B            & Sim.~2          & {\color{novelred}New component} \\
+    Effect C            & Sim.~3          & {\color{novelred}New component} \\
+    Effect D            & Sim.~4          & Pre-existing        \\
+  \end{tabular}
+  \note{
+    Use this table to orient the audience before the deep dives.
+    Red entries depend on the novel architecture; black entries are
+    inherited. Spend 45 seconds here, then pick the two or three
+    deep-dive slides that make the strongest case.
+  }
 \end{frame}
 
 \section{Discussion}
 
 \begin{frame}{Implications}
   \begin{itemize}
-    \item What this changes about our understanding
-    \item Open question for future work
+    \item What this changes
+    \item Open question
   \end{itemize}
-  \note{}
+  \note{Full close: restate the contribution in one sentence, tie to the
+        motivation, flag the one open question you want the audience to
+        take home.}
 \end{frame}
 
 % --- Acknowledgments -------------------------------------------------------

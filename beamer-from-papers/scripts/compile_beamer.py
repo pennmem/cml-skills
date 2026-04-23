@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
-"""Compile a Beamer .tex file to PDF with error filtering.
+"""Compile a Beamer .tex file to PDF with error filtering + preview rendering.
 
 Usage:
-    python compile_beamer.py <path/to/deck.tex> [--skip-bib] [--notes-only]
+    python compile_beamer.py <path/to/deck.tex> \
+        [--skip-bib] [--notes-only] [--render-preview SLIDES]
 
 Runs pdflatex → bibtex → pdflatex → pdflatex, capturing logs and surfacing
 only the actionable error lines (undefined references, missing figures,
@@ -10,7 +11,17 @@ package errors) instead of the full 2000-line LaTeX log.
 
 Outputs the PDF next to the .tex. If --notes-only, toggles the Beamer notes
 option and produces a second PDF with only the speaker notes.
+
+--render-preview renders individual slides to PNG via pdftoppm at 180 DPI
+for visual clipping inspection. pdflatex succeeds silently when slide
+content overflows the frame boundary — always render-verify after a batch
+of edits. SLIDES may be:
+    7        — slide 7 only
+    3-8      — range 3 through 8
+    all      — every slide (slow; use sparingly)
 """
+
+from __future__ import annotations
 
 import argparse
 import re
@@ -21,7 +32,7 @@ from pathlib import Path
 
 
 REQUIRED_TOOLS = ["pdflatex"]
-OPTIONAL_TOOLS = ["bibtex", "biber"]
+OPTIONAL_TOOLS = ["bibtex", "biber", "pdftoppm"]
 
 
 def check_tools() -> list[str]:
@@ -67,7 +78,73 @@ def run_pass(cmd: list[str], cwd: Path, label: str) -> tuple[int, str]:
         return 127, f"{label}: {e}"
 
 
-def compile_deck(tex_path: Path, skip_bib: bool, notes_only: bool) -> int:
+def parse_preview_range(spec: str, total_pages: int | None = None) -> tuple[int, int]:
+    """Return (first, last) 1-indexed slide numbers to render.
+
+    Accepts '7', '3-8', or 'all'. 'all' requires total_pages.
+    """
+    spec = spec.strip().lower()
+    if spec == "all":
+        if total_pages is None:
+            raise ValueError("'all' requires total_pages")
+        return 1, total_pages
+    if "-" in spec:
+        a, b = spec.split("-", 1)
+        return int(a), int(b)
+    n = int(spec)
+    return n, n
+
+
+def count_pdf_pages(pdf_path: Path) -> int | None:
+    """Best-effort page count from the pdflatex log next to the PDF."""
+    log_path = pdf_path.with_suffix(".log")
+    if not log_path.exists():
+        return None
+    m = re.search(r"Output written on .* \((\d+) pages?", log_path.read_text(errors="replace"))
+    return int(m.group(1)) if m else None
+
+
+def render_preview(pdf_path: Path, spec: str) -> list[Path]:
+    """Render named slides to PNG with pdftoppm. Returns list of PNG paths."""
+    if not shutil.which("pdftoppm"):
+        print(
+            "WARN: pdftoppm not found; skipping render-preview. "
+            "Install poppler-utils to enable.",
+            file=sys.stderr,
+        )
+        return []
+
+    total_pages = count_pdf_pages(pdf_path)
+    try:
+        first, last = parse_preview_range(spec, total_pages)
+    except ValueError as e:
+        print(f"WARN: bad --render-preview spec '{spec}': {e}", file=sys.stderr)
+        return []
+
+    out_dir = pdf_path.parent / "preview"
+    out_dir.mkdir(exist_ok=True)
+    stem = pdf_path.stem
+    cmd = [
+        "pdftoppm", "-png", "-r", "180",
+        "-f", str(first), "-l", str(last),
+        str(pdf_path), str(out_dir / stem),
+    ]
+    result = subprocess.run(cmd, capture_output=True, text=True)
+    if result.returncode != 0:
+        print(f"WARN: pdftoppm failed: {result.stderr.strip()}", file=sys.stderr)
+        return []
+    pngs = sorted(out_dir.glob(f"{stem}-*.png"))
+    if pngs:
+        print(f"Preview rendered: {len(pngs)} slide(s) in {out_dir}", file=sys.stderr)
+        for p in pngs[:5]:
+            print(f"  {p}", file=sys.stderr)
+        if len(pngs) > 5:
+            print(f"  ... and {len(pngs) - 5} more", file=sys.stderr)
+    return pngs
+
+
+def compile_deck(tex_path: Path, skip_bib: bool, notes_only: bool,
+                 render_preview_spec: str | None = None) -> int:
     cwd = tex_path.parent
     stem = tex_path.stem
 
@@ -127,6 +204,9 @@ def compile_deck(tex_path: Path, skip_bib: bool, notes_only: bool) -> int:
         if len(warnings) > 10:
             print(f"  ... and {len(warnings) - 10} more", file=sys.stderr)
 
+    if render_preview_spec:
+        render_preview(pdf_path, render_preview_spec)
+
     print(str(pdf_path))
     return 0
 
@@ -137,6 +217,9 @@ def main() -> int:
     ap.add_argument("--skip-bib", action="store_true")
     ap.add_argument("--notes-only", action="store_true",
                     help="Produce a notes-only PDF alongside the talk PDF")
+    ap.add_argument("--render-preview", metavar="SLIDES", default=None,
+                    help="Render SLIDES (e.g. '7', '3-8', or 'all') to PNG "
+                         "via pdftoppm for visual clipping inspection")
     args = ap.parse_args()
 
     if not args.tex_path.exists():
@@ -152,7 +235,8 @@ def main() -> int:
         )
         return 127
 
-    return compile_deck(args.tex_path, args.skip_bib, args.notes_only)
+    return compile_deck(args.tex_path, args.skip_bib, args.notes_only,
+                        args.render_preview)
 
 
 if __name__ == "__main__":
