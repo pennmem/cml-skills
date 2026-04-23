@@ -1,0 +1,167 @@
+{
+  "description": "Index of research projects by topic. Projects are from RESEARCH/KahanaOverleafLaTeX/ and RESEARCH/References-Publications/KahanaPubs/.",
+  "last_updated": "2026-03-15",
+  "topics": {
+    "memory_theory_and_models": {
+      "label": "Memory Theory & Data",
+      "description": "Retrieved context models (TCM, CMR, sCMR, CMR-IA), empirical tests of these models, behavioral phenomena in free recall, serial recall, and recognition memory.",
+      "overleaf_projects": [
+        {"name": "A memory-based theory of emotional disorders", "id": "371189375926", "note": "CMR applied to emotional/mood disorders (CoheKahaCMR3)"},
+        {"name": "A model of recall and recognition", "id": "371189963499"},
+        {"name": "A retrieved context model of human spatial memory", "id": "371190232205"},
+        {"name": "A theory of memory for items and associations (CMR-IA)", "id": "371190057236"},
+        {"name": "Accounting for Variability in Human Memory Using Exogenous Factors", "id": "371190114578"},
+        {"name": "AkaKaha2018 (submitted)", "id": "371190119734"},
+        {"name": "AkaKaha2018b (in prep)", "id": "371187985648"},
+        {"name": "CMR Embedded Processes", "id": "371191544740"},
+        {"name": "CMR-Replay manuscript", "id": "371190068645"},
+        {"name": "Clinical Validation of Laboratory Tasks", "id": "371191554430"},
+        {"name": "Decoding False Memories", "id": "371190227627"},
+        {"name": "Decoding False Memories-Nat_Neuro", "id": "371191650261"},
+        {"name": "Do repetitions reinstate context?", "id": "371191383817"},
+        {"name": "FHM2", "id": "371188658366", "note": "Foundations of Human Memory, 2nd edition"},
+        {"name": "Forward and Backward Serial Recall", "id": "371191478084"},
+        {"name": "FR CatFR Recall Transitions", "id": "371190678788"},
+        {"name": "GershmanChapter", "id": "371189941297"},
+        {"name": "Herrema-MurdockStudy", "id": "371191075070"},
+        {"name": "Initiation Tendencies in Free Recall", "id": "371191103581"},
+        {"name": "Inter-response times in free recall", "id": "371192188252"},
+        {"name": "Judgement Of Recency", "id": "371191338017"},
+        {"name": "Kahana2019AnnualReview", "id": "371191194544"},
+        {"name": "KahanaMemorySearch", "id": "371191352707"},
+        {"name": "LawsOfMemory", "id": "371191624237"},
+        {"name": "LiKaha19", "id": "371190781741"},
+        {"name": "Memory Search Book Chapter", "id": "371191749524"},
+        {"name": "Mood disorders elicit excess intrusions in free recall", "id": "371191525440"},
+        {"name": "Neural Context Reinstatement of Recurring Events", "id": "371190830222"},
+        {"name": "Neural Replay as Contextual Dynamics", "id": "371190678986"},
+        {"name": "OrderReconstruction2022", "id": "371190554233"},
+        {"name": "Organization of Memory Across Days", "id": "371191998299"},
+        {"name": "Organizational Dynamics of Memory Across Days", "id": "371192334517"},
+        {"name": "PazdKaha22", "id": "371191535780"},
+        {"name": "PEERS", "id": "371192471223"},
+        {"name": "PEERS_KahanaEtal2023", "id": "371190915726"},
+        {"name": "Phonological Similarity and Recall Dynamics", "id": "371191759108"},
+        {"name": "PsychReview", "id": "371191748788"},
+        {"name": "Recall Asymmetry Analysis (Connor Keane)", "id": "371191626167"},
+        {"name": "recognition_recency_similarity", "id": "371191778185"},
+        {"name": "sCMR", "id": "371191137152"},
+        {"name": "sCMRfromSNOL", "id": "371191142326"},
+        {"name": "SileoKaha18", "id": "371191379045"},
+        {"name": "SpecializedRecall", "id": "371192247851"},
+        {"name": "study_phase_reinstatement", "id": "371191233247"},
+        {"name": "AggaKaha_Math", "id": "371190520149"},
+        {"name": "APEM2016", "id": "371190621405"},
+        {"name": "APEM2020", "id": "371190611893"},
+        {"name": "APEM2026", "id": "371190539575"},
+        {"name": "CDiPS Twelve Questions", "id": "371190873524"},
+        {"name": "intergenerational", "id": "371192174079"},
+        {"name": "Mathpaper", "id": "371189927551"},
+        {"name": "iglif", "id": "371191969643"}
+      ],
+      "kahana_pubs_patterns": ["PolyEtal09", "LohnEtal15", "HowaKaha02", "KahaEtal", "CoheKaha", "AkaKaha", "HerrEtal", "PazdKaha", "AkaEtal"]
+    },
+
+    "behavioral_economics_memory_decisions": {
+      "label": "Behavioral Economics, Memory & Decision Making",
+      "description": "Work at the intersection of episodic memory and economic decision making, including papers with Wachter on portfolio choice and forecasting. Also includes intracranial studies of reward and reward prediction error (Ramayya, Zaghloul).",
+      "overleaf_projects": [
+        {"name": "Episodic Retrieval and Construction of Value", "id": "371190654927"},
+        {"name": "Fear and Greed", "id": "371189815033"},
+        {"name": "Memory and Forecasting", "id": "371190695747"},
+        {"name": "PortolioChoice", "id": "371191542347", "note": "Portfolio choice — Wachter collaboration"},
+        {"name": "RCTDDM", "id": "371191591123", "note": "Retrieved context drift-diffusion model"},
+        {"name": "Retrieved Context—DDM", "id": "371191996355"},
+        {"name": "StockTicker", "id": "371191386845"},
+        {"name": "The Role of Memory Retrieval in Evaluation", "id": "371191787734"}
+      ],
+      "kahana_pubs_patterns": ["RamaEtal", "ZaghEtal", "WachKaha", "KahaWach"],
+      "note": "Ramayya and Zaghloul reward/RPE intracranial papers cross-list with EEG topic"
+    },
+
+    "eeg_oscillations": {
+      "label": "EEG & Oscillations",
+      "description": "Studies using intracranial or scalp EEG recordings during memory tasks, focusing on theta, alpha, beta, and gamma oscillations. Excludes single-unit recording studies (those are in the single_unit_recordings category).",
+      "overleaf_projects": [
+        {"name": "Brain-wide responses to item repetition", "id": "371190423863"},
+        {"name": "CogNeuro2020 Phase Reset", "id": "371189049030"},
+        {"name": "CourierThetaClustering", "id": "371191251858"},
+        {"name": "CrossDecoding", "id": "371191249291"},
+        {"name": "DeHaKaHa22", "id": "371190707136"},
+        {"name": "EEG biomarkers of free recall", "id": "371191387021"},
+        {"name": "EphysHumanMemory", "id": "371190650359"},
+        {"name": "Hippocampal phase reset as a marker of memory encoding", "id": "371190361467"},
+        {"name": "Intracranial Courier", "id": "371191192144"},
+        {"name": "KahaFalk22", "id": "371191180668", "note": "Scalp EEG"},
+        {"name": "Kragel_Kahana", "id": "371191307113"},
+        {"name": "List level SME", "id": "371190627949"},
+        {"name": "Neural fatigue manuscript", "id": "371190527280"},
+        {"name": "NeuralDecodingOfAnticipation", "id": "371192516909"},
+        {"name": "PEERS 1 Aging EEG Paper", "id": "371190467654"},
+        {"name": "phase reset SME", "id": "371190866383"},
+        {"name": "RaoEtal24", "id": "371192610282"},
+        {"name": "RaoEtal24Revision", "id": "371191679780"},
+        {"name": "RetrievalConnectivity", "id": "371191981902"},
+        {"name": "RIPPLES", "id": "371191187250"},
+        {"name": "RIPPLES—encoding", "id": "371190805855"},
+        {"name": "Rubenstein-Weidemann SME", "id": "371191101422"},
+        {"name": "Schonhaut_DR_hpc_phase_locking_manuscript", "id": "371191508401"},
+        {"name": "SchonhautEtal2023_eLifeRev2", "id": "371191225457"},
+        {"name": "SpectralTag", "id": "371191506589"},
+        {"name": "Theta oscillations and spatial memory in humans", "id": "371192269610"},
+        {"name": "Theta Oscillations in the Human Brain Distinguish True and False Memories", "id": "371191777547"},
+        {"name": "ThetaDetection", "id": "371192287197"},
+        {"name": "Variability in spectral activity predicts mathematical problem solving", "id": "371191444600"},
+        {"name": "CourierReinstate Analysis Plan", "id": "371190311126"},
+        {"name": "EHM", "id": "371190640668"},
+        {"name": "KateEtal21_R&R_CL", "id": "371191192723"},
+        {"name": "Spatial Learning Project", "id": "371192889064"}
+      ],
+      "kahana_pubs_patterns": ["SedeEtal", "BurkEtal", "LongEtal", "LegaEtal", "SolmEtal", "KragEtal", "HerzEtal", "RaoEtal", "DeHaEtal", "KahaFalk"]
+    },
+
+    "brain_stimulation": {
+      "label": "Brain Stimulation",
+      "description": "Open-loop and closed-loop brain stimulation studies, including DARPA RAM program work and Nia Therapeutics translational studies. Covers both basic science stimulation effects and clinical/device development.",
+      "overleaf_projects": [
+        {"name": "brain-guided-timing-for-optimal-learning (NICLS2)", "id": "371190577209"},
+        {"name": "EzzyEtal20_RAMfinal (1)", "id": "371188710389", "note": "DARPA RAM final paper"},
+        {"name": "EzzyKaha22", "id": "371191809043"},
+        {"name": "FR validity in TBI", "id": "371190690668"},
+        {"name": "Multisite closed-loop brain stimulation", "id": "371191351037"},
+        {"name": "Nia SNS manuscript", "id": "371191727728"},
+        {"name": "Nia SNS Manuscript Brain Stimulation", "id": "371190904088"},
+        {"name": "NICLS-EEG", "id": "371191729463"},
+        {"name": "NICLS1", "id": "371191017169"},
+        {"name": "NicoleClassifierPaper", "id": "371191729803"},
+        {"name": "observational_stim_predictions", "id": "371192440442"},
+        {"name": "RepFR2 - Brain stimulation during retrieval", "id": "371190289951"},
+        {"name": "TBI", "id": "371191791991"},
+        {"name": "TBI Closed-Loop Stimulation", "id": "371191496649"},
+        {"name": "TBI-Stim", "id": "371191354854"},
+        {"name": "Theta burst stimulation", "id": "371191852024"}
+      ],
+      "kahana_pubs_patterns": ["EzzyEtal", "SolmEtal", "KateEtal", "BroiEtal25"]
+    },
+
+    "single_unit_recordings": {
+      "label": "Single-Unit Recordings",
+      "description": "Studies involving single-neuron recordings in humans, including time cells, MTL neuron phase locking, shared neural assemblies, and other single-unit phenomena.",
+      "overleaf_projects": [
+        {"name": "eLife Revision -- MTL Neurons Phase Lock to Hippocampal Theta", "id": "371191676704"},
+        {"name": "eLife Revision -- MTL Neurons Phase Lock to Hippocampal Theta (Copy for Brandon)", "id": "371189949157"},
+        {"name": "GraySharedAssemblies", "id": "371191422163"},
+        {"name": "GrayTimeCellsSharing", "id": "371190826952"},
+        {"name": "MTL Neurons Phase Lock to Hippocampal Theta", "id": "371192433170"},
+        {"name": "Time cells in the human brain", "id": "371192286689"},
+        {"name": "Time cells in the human brain – draft manuscript", "id": "371191386276"}
+      ],
+      "kahana_pubs_patterns": ["GrayEtal", "SchonEtal23"]
+    }
+  },
+
+  "non_manuscripts": {
+    "note": "Grants, templates, class materials, CVs, letters, and other non-manuscript projects. Excluded from the topic index.",
+    "count": "~60 projects (grants, templates, syllabi, practice projects, NRSA proposals, RPPRs, etc.)"
+  }
+}
