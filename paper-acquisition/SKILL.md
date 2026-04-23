@@ -29,6 +29,30 @@ Default search order when the user doesn't specify: **prepared local → unprepa
 
 Each of these has a reference file; read them as you go. The SKILL.md is intentionally short — specifics live alongside.
 
+## Optional integration with `memory-publications`
+
+If the `memory-publications` skill is installed alongside this one, it provides richer context that makes paper-acquisition smarter without being required. Check for it at skill startup:
+
+```bash
+# On Claude.ai skills typically sit as siblings in ~/.claude/skills or similar.
+# Probe the usual spots:
+for d in ./skills/memory-publications /mnt/skills/user/memory-publications \
+         ~/.claude/skills/memory-publications ../memory-publications; do
+  [ -f "$d/SKILL.md" ] && echo "FOUND: $d" && break
+done
+```
+
+When present, prefer its data over rediscovering things:
+
+- **`references/research-index.json`** — authoritative topic classification for 206 Overleaf projects plus filename patterns for KahanaPubs PDFs. Use this as the **primary** lookup for topic-based searches (see `references/locate_by_topic.md`). It replaces the "enumerate candidates + extract every abstract" walk when the user's query maps cleanly onto one of the five research threads.
+- **`references/current-projects.md`** — priority-ranked list of 12 active manuscripts with Box folder IDs, lead authors, short names, and status. Use it to resolve short-name queries like "my PTSD paper" or "the observational stim paper" to concrete Box folders + `.tex` file IDs (see `references/locate_by_name.md`).
+- **`references/domain-knowledge.md`** — CMR-family model details, TAG framework, oscillations vocabulary. Useful when the user says "our sCMR paper" and you need to know sCMR is the spatial extension (Herweg & Kahana) vs. CMR-IA (Jin et al.).
+
+**When `memory-publications` is absent**, fall back to the behaviors already documented in `references/locate_by_topic.md` and `references/locate_by_name.md` — filesystem walks, abstract extraction, pennmem GitHub enumeration. The skill is fully functional without it; the integration just avoids reinventing work that's already indexed.
+
+**Do not duplicate** memory-publications content into this skill's references. If a user asks for something covered by its files and the skill isn't installed, report the gap rather than partially replicating it.
+
+
 ## Environment detection
 
 ```bash

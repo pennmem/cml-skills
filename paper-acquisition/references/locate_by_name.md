@@ -2,7 +2,29 @@
 
 When the user names a specific paper (or several), this is the flow. Cascade through sources unless they specified one.
 
-## Parsing the user's reference
+## First check: `memory-publications/references/current-projects.md` (when installed)
+
+If `$MEMPUB_DIR` is set at skill startup, read `current-projects.md` **before** searching sources. It maintains a priority-ranked list of 12 active manuscripts with short names, lead authors, target journals, and confirmed Box folder + file IDs. Common user references this resolves:
+
+| User says | Resolves to (per current-projects.md) |
+|---|---|
+| "my PTSD paper" / "the emotional paper" | Project 1: DeHaan/Sileo/Kahana |
+| "the observational stim paper" | Project 2: DeHaan, Halpern, Kahana |
+| "KahaFalk22" / "the Intelligence paper" | Project 3: Falkenburg, Broitman, Kahana |
+| "the anticipation paper" | Project 4: J. Kahana, Lega, M. J. Kahana |
+| "SpectralTag" / "the TAG review" | Project 5: Broitman et al. |
+| "the phonological paper" | Project 7: Herrema, Kahana |
+| "Herrema-Murdock" | Project 8 |
+| "the Courier paper" / "Intracranial Courier" | Project 9: Bruce, Tantry, Kahana |
+| "the spatial model paper" / "sCMR" / "Herweg" | Project 10: Herweg, Kahana |
+| "the multisite stim paper" | Project 11 |
+| "open-loop stim at retrieval" / "RepFR2" | Project 12 |
+
+When a match hits, you get the Box folder ID and the canonical `.tex` file name/ID for free — no source searching needed. Report the match back to the user ("Matched 'my PTSD paper' → Project 1: DeHaan/Sileo/Kahana, target MC/JEP:LMC. Proceed?") so they can catch mis-resolutions.
+
+If `memory-publications` is absent, or the user's query doesn't match any active project's short names or lead authors, fall through to the source-cascade below.
+
+## Parsing the user's reference (source cascade)
 
 Users refer to papers in varied ways:
 

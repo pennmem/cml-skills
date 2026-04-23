@@ -9,7 +9,30 @@ Turn one or more CML paper bundles into a scientific Beamer presentation, with o
 
 ## Relationship to other skills
 
-This skill is the *consumer* of paper bundles produced by `paper-acquisition`. Always run `paper-acquisition` first if bundles don't already exist. If the user asks for a presentation without having run acquisition, do that step transparently and report it — don't make them run two separate commands when they asked for one thing.
+**Upstream (required input).** This skill is the consumer of paper bundles produced by `paper-acquisition`. Always run `paper-acquisition` first if bundles don't already exist. If the user asks for a presentation without having run acquisition, do that step transparently and report it — don't make them run two separate commands when they asked for one thing.
+
+**Lateral (optional enrichment).** If the `memory-publications` skill is installed, consult three of its reference files to improve output quality. The skill works without them — the fallback is generic academic voice and figure-caption-based content — but the difference in output quality is substantial.
+
+```bash
+# Check for memory-publications once at skill startup
+for d in ./skills/memory-publications /mnt/skills/user/memory-publications \
+         ~/.claude/skills/memory-publications ../memory-publications; do
+  [ -f "$d/SKILL.md" ] && MEMPUB_DIR="$d" && break
+done
+```
+
+When `$MEMPUB_DIR` is set, integrate these three files at specific workflow steps:
+
+| memory-publications file | Used by | Where |
+|---|---|---|
+| `references/domain-knowledge.md` | Deep reading + slide drafting | `references/reading_strategy.md` tells you when to consult it |
+| `references/writing-style.md` | Speaker notes + slide bullet voice | `references/speaker_notes.md` tells you how to adapt it to the notes register |
+| `references/research-index.json` | Topic-aware deck structure | `references/presentation_structure.md` uses it to pick section patterns |
+
+`memory-publications/references/current-projects.md` is primarily a paper-acquisition concern (it maps short names to Box folders), but when one of the user's active manuscripts is the subject of the talk, reading the project's entry gives you target-journal context, lead-author list, and status that can seed the title slide and acknowledgments.
+
+**Do not duplicate** memory-publications content into this skill's references. If it isn't installed, use the fallbacks described in the downstream reference files.
+
 
 ## High-level workflow
 

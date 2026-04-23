@@ -2,6 +2,20 @@
 
 The user asked for "deepest possible reading" of each paper. This document describes how to get real comprehension — not a skim — before generating any slides.
 
+## Consulting `memory-publications/references/domain-knowledge.md` when installed
+
+If the `memory-publications` skill is installed (see the integration section of this skill's SKILL.md), read its `references/domain-knowledge.md` **once at the start of the deep-reading pass** and keep it as reference material while reading papers and writing slides. It gives you:
+
+- Correct model provenance: CMR (Polyn, Norman, Kahana 2009) vs. TCM (Howard & Kahana 2002) vs. CMR2 (Lohnas et al. 2015) vs. eCMR (Talmi et al. 2019) vs. CMR-IA (Jin et al.) vs. sCMR (Herweg & Kahana). Don't conflate these on slides.
+- Canonical terminology: "contiguity effect" (not "contiguity bias"), "lag-CRP", "semantic clustering", "PLI / ELI / ILI", "spectral tilt", "TAG" (T+A-G+), "SME" vs. "SCE", "delta-classifier" post-stim minus pre-stim.
+- Parameter names that should appear on equation slides without drift: β_enc, β_rec, γ_FC, γ_CF, φ_s, φ_d, s, κ, λ, η.
+- Statistical reporting conventions: mixed-effects models with random intercepts + slopes, cluster-based permutation (Maris & Oostenveld 2007), bootstrap CIs, Yule's Q.
+- Framework-specific details (TAG, closed-loop stim, SME decomposition) that may be invoked without explanation in the paper's methods section — you'll need them to interpret figures.
+
+When a paper uses a term the domain-knowledge file defines differently, trust the paper's usage (it's the authority on its own contents) but note the divergence in a warning on the slide plan so the speaker can decide how to resolve it.
+
+**When `memory-publications` is absent**, you proceed without this scaffolding. Be extra conservative: if a term's meaning is uncertain, quote the paper's own phrasing verbatim on the slide rather than paraphrasing, and flag the uncertainty in the slide's note.
+
 ## Order of operations per paper
 
 1. **Read the manifest** (`manifest.json`) — title, authors, year, figure count

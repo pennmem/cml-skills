@@ -4,6 +4,31 @@ The tone and length of speaker notes should match what a scientist would actuall
 
 This reference uses 16 real speaker notes from CML's `AES_2017.pptx` as calibration data.
 
+## Adapting `memory-publications/references/writing-style.md` when installed
+
+If the `memory-publications` skill is installed, its `writing-style.md` extracts Michael Kahana's writing voice across two registers: journal articles (Annual Review, Nature Communications, JEP:LMC, Psych Review) and the textbook *Foundations of Human Memory*. Speaker notes are a **third register** that borrows from both without matching either. Specifically:
+
+**Borrow from the textbook register**:
+- "Consider..." as an invitation to engage
+- Concrete running examples ("the classic word list house, shoe, tree, car...")
+- Pedagogical signposting ("[CLICK] after showing the DFR comparison")
+- Honest acknowledgment of what's not known
+
+**Borrow from the journal-article register**:
+- Precise terminology — use the domain's actual terms, never soften them to "memory processes"
+- The "X, however, Y" pivot for contrasts
+- Active "we" voice for work by the author's group
+- Citations to load-bearing prior work inline in the note ("Howard & Kahana 2002")
+
+**Don't borrow from either**:
+- Long embedded clauses (journal register loves these; notes should be readable at a glance)
+- Historical vignettes and classical quotations (textbook opener device; too slow for a note)
+- Meta-scientific reflection (PEERS paper; wrong scale for a slide)
+
+**Words to reach for** (per writing-style.md §8): "accounts for" (models), "gives rise to", "by contrast", "benchmark", "embodies", "in the same manner that". **Words to avoid**: "interestingly", "importantly", "robust" (as filler), "it is worth noting that", excessive "novel".
+
+When `memory-publications` is absent, fall back to the tone observed in the AES 2017 notes (§"Observed patterns" below). Don't invent a voice — stay close to what the real examples show.
+
 ## Observed patterns in real CML talks
 
 **Length**: Most substantive notes run 100-400 characters. The longest goes to ~1200 characters on methodology-heavy slides. Short notes (under 50 chars) are rare — when they appear, they're bullet-point reminders rather than prose.

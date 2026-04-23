@@ -2,6 +2,30 @@
 
 Target slide counts assume ~60 seconds per slide for an expert audience, ~90 seconds for grad students, ~2 minutes for a teaching lecture. Adjust accordingly.
 
+## Topic-aware structure selection (when `memory-publications` is installed)
+
+Before picking a template, classify the paper(s) into one of the five research threads defined in `memory-publications/references/research-index.json`:
+
+1. `memory_theory_and_models` — behavioral/theoretical papers
+2. `behavioral_economics_memory_decisions` — memory × decisions; mixed audience register
+3. `eeg_oscillations` — intracranial or scalp EEG methods-heavy
+4. `brain_stimulation` — closed-loop / open-loop stim; translational slant
+5. `single_unit_recordings` — unit data; neurophysiology-heavy
+
+The thread changes what "methods" means and therefore what slides are load-bearing:
+
+| Thread | Needs extra slides for | Can often cut |
+|---|---|---|
+| memory_theory_and_models | Model equations + schematic; fit procedure; parameter interpretation | Heavy methods detail |
+| behavioral_economics_memory_decisions | Task paradigm diagram; cross-domain translation (econ ↔ psych); both-domain definitions | Long literature review |
+| eeg_oscillations | Electrode coverage figure; frequency bands definition; referencing / preprocessing; IRASA if used | Behavioral design detail |
+| brain_stimulation | Stim parameters (amplitude / freq / pulse width / duration / location); target selection; safety / artifact handling; classifier design if closed-loop | Pure behavioral controls |
+| single_unit_recordings | Unit isolation criteria; anatomical localization; spike-sorting QC | Population-level decoding |
+
+So before picking the single-paper template below, read the paper's thread and adjust: a 25-slide brain-stimulation talk might devote 5 slides to the methods section where a 25-slide behavioral talk needs only 3.
+
+When `memory-publications` is absent, skip this step and use the generic template. The output is still usable — just less tuned.
+
 ## Single paper, expert audience
 
 Default for most requests. Maps one paper to ~25 slides covering the full arc from motivation to implications.
