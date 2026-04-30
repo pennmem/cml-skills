@@ -164,5 +164,8 @@ If the skill is running on Claude.ai or similar and the user wants a paper that 
 - `scripts/build_bundle.py` — construct the standardized bundle from a source dir
 - `scripts/extract_abstract.py` — pull abstract from .tex or PDF
 - `scripts/extract_figures.py` — gather all figure files from a repo
+- `scripts/search_online.py` — given title + authors, resolve a publication DOI/URL (CrossRef primary, arXiv fallback, on-disk cache)
+- `scripts/scrape_wiki.py` — scrape the CML wiki Publications page and emit one record per publication with classified PDF / code / data / supplemental / poster / Ephys-access links (cached on disk)
+- `scripts/generate_report.py` — build a CSV + PDF inventory of every CV-listed paper's draft, code, and data availability across three sources (GitHub, Overleaf, wiki)
 
 Each script has a `--help` flag. Read the script itself before modifying.
