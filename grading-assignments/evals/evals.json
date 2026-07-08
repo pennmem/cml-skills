@@ -1,0 +1,40 @@
+{
+  "skill_name": "grading-assignments",
+  "evals": [
+    {
+      "id": 1,
+      "name": "grade-single-module",
+      "prompt": "Grade this student's Module 4 submission at /tmp/some_student against the DataSolutions-BIDS answers.",
+      "expected_output": "Runs scripts/compare_answers.py --modules 4 --student /tmp/some_student, reads the _grade_report.json, reports pass/fail counts and which questions failed with their rmse/jaccard, and notes if truth answers are missing (solution not run).",
+      "files": []
+    },
+    {
+      "id": 2,
+      "name": "ask-verbosity-and-build-report",
+      "prompt": "Autograde assignment 7 (Module 15) for these three students and make them feedback notebooks. Only give them a little detail.",
+      "expected_output": "Maps 'a little' to verbosity=little, runs compare_answers for module 15 on each student, deciphers approaches, writes approach_Module_15.json, then build_report_notebook.py --verbosity little to produce one grade_report_Module_15.ipynb per student; reports the notebook paths.",
+      "files": []
+    },
+    {
+      "id": 3,
+      "name": "compare-approaches",
+      "prompt": "For the SPC question in Module 4, how did this student's approach differ from our solution?",
+      "expected_output": "Runs decipher_approach.py on both the student and Solution_Module_04 notebooks, reads the two code extracts for the Q3.x SPC keys, and explains the methodological difference (e.g. pooled rows vs per-subject averaging), grounded in the actual code, referencing the stats.",
+      "files": []
+    },
+    {
+      "id": 4,
+      "name": "prep-instructor-setup",
+      "prompt": "Add the answer-saving grader cells to all the student assignment notebooks.",
+      "expected_output": "Runs scripts/prep_assignments.py --mode student --repo COGS4290_DataMemoryBrains-BIDS --all, notes it is idempotent, and reports how many save cells/notes were placed per module plus any UNPLACED questions needing manifest review.",
+      "files": []
+    },
+    {
+      "id": 5,
+      "name": "missing-truth-guidance",
+      "prompt": "Grade Module 15 but the DataSolutions answers folder is empty.",
+      "expected_output": "Detects that DataSolutions-BIDS/answers/Module_15 has no manifest, reports everything as missing_truth, and explains the instructor must run Solution_Module_15 (needs /data/LTP_BIDS + Dask, possibly the RAM_maint account) to populate truth before grading.",
+      "files": []
+    }
+  ]
+}
