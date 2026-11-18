@@ -1,0 +1,40 @@
+{
+  "skill_name": "peers",
+  "evals": [
+    {
+      "id": 1,
+      "name": "exp4-recall-dynamics",
+      "prompt": "Plot the serial position curve and the lag-CRP for PEERS Experiment 4.",
+      "expected_output": "Claude fetches the behavioral files with fetch_peers.sh, runs selftest.py, and loads Experiment 4 with peers.load_events(4). It keeps complete sessions, leaves out session 23 or says why it kept it, computes each curve within subject and averages subjects with equal weight, and states N and the sessions used. Mean recall probability is about .48; the lag-CRP is about .39 at lag +1 and .21 at lag -1. The figure follows references/figures.md: black filled symbols with 95% confidence intervals, a break at lag 0, vector PDF. Claude looks at the rendered figure before delivering it.",
+      "files": []
+    },
+    {
+      "id": 2,
+      "name": "exp3-intrusions",
+      "prompt": "In ltpFR, how many prior-list intrusions per list did the externalized-recall subjects make compared with the standard-recall subjects?",
+      "expected_output": "Claude identifies this as PEERS Experiment 3 and reads references/experiments-1-3.md. It uses sessions 15-19 for the externalized group (LTP063-LTP209, 92 subjects) and sessions 16-19 for the standard group (LTP210 and later, 60 subjects), and reports about 0.69 and 0.075 prior-list intrusions per list, beside the 0.68 and 0.08 of Lohnas, Polyn and Kahana (2015, Table 5). It says that the spacebar rejections are not in the public files, so rejected and unrejected intrusions cannot be separated.",
+      "files": []
+    },
+    {
+      "id": 3,
+      "name": "irt-family",
+      "prompt": "Show me how inter-response times change with output position in PEERS 1.",
+      "expected_output": "Claude does not pool across the number of words recalled. It uses peers_analysis.irt_family (or the equivalent) to give one curve per number recalled, each averaged within subject and then across subjects, with at least five lists per subject per partition, plotted on a log axis. It does not use pybeh.irt unless selftest.py reports that the installed copy has the fix. It says which subjects, sessions and list types went in.",
+      "files": []
+    },
+    {
+      "id": 4,
+      "name": "published-versus-public-n",
+      "prompt": "How many subjects completed PEERS Experiment 4?",
+      "expected_output": "Claude gives both numbers and their sources: Kahana et al. (2024) report 98 subjects who completed 24 sessions; the public release (OpenNeuro ds004395 v2.0.0) holds 127 subjects with at least one session, 83 with 24 complete sessions and 84 with sessions 0-22 complete. It does not present either number as the other.",
+      "files": []
+    },
+    {
+      "id": 5,
+      "name": "exp2-methods",
+      "prompt": "What were the distractor conditions in PEERS Experiment 2, and how many lists of each did a session have?",
+      "expected_output": "Claude answers from references/experiments-1-3.md without loading data: five conditions written as seconds of arithmetic before every word and after the last word (0-0, 0-8, 0-16, 8-8, 16-16); a 12-list session has two lists each of 0-0, 0-16 and 16-16 and three each of 0-8 and 8-8, with lists 1-2 one 0-8 and one 8-8; the first session of the experiment (file session 7) has 14 lists. It notes that these are file sessions 7-13, or 7-15 for subjects LTP210 and later.",
+      "files": []
+    }
+  ]
+}
