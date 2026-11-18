@@ -276,8 +276,8 @@ def plot_lag_crp(ax, summary, color=INK, marker='o', label=None):
 
 def standard_figure(ev, title=None, min_lists=5, partitions=4):
     """Four panels for one condition of list recall: serial position curve, probability of first recall,
-    lag-CRP, and the family of inter-response-time curves. Error bars are 95% confidence intervals across
-    subjects. Returns the figure (7.5 x 2.6 in); save as PDF.
+    lag-CRP, and the family of inter-response-time curves (the adjacent partitions that hold the most lists).
+    Error bars are 95% confidence intervals across subjects. Returns the figure (7.5 x 2.6 in); save as PDF.
     """
     import matplotlib.pyplot as plt
     set_style()
@@ -296,9 +296,11 @@ def standard_figure(ev, title=None, min_lists=5, partitions=4):
         ax.set_xticks([1] + list(range(4, L + 1, 4)))
     plot_lag_crp(axs[2], summarize(lag_crp(ev), 'prob', 'lag'))
     f = irt_family(ev, min_lists=min_lists)
-    counts = f.drop_duplicates(['subject', 'n_recalled']).groupby('n_recalled').n_lists.sum()
+    # show the adjacent partitions that hold the most lists, counted before the min_lists exclusion
+    counts = (irt_family(ev, min_lists=1).drop_duplicates(['subject', 'n_recalled'])
+              .groupby('n_recalled').n_lists.sum())
     lo = max(counts.index, key=lambda a: sum(counts.get(a + i, 0) for i in range(partitions)))
-    for i, n_rec in enumerate(range(lo, lo + partitions)):       # the adjacent partitions that hold the most lists
+    for i, n_rec in enumerate(range(lo, lo + partitions)):
         s = summarize(f[f.n_recalled == n_rec], 'irt', 'outpos')
         if s.empty:
             continue
@@ -312,8 +314,9 @@ def standard_figure(ev, title=None, min_lists=5, partitions=4):
     axs[3].set(xlabel='Output position', ylabel='Inter-response time (s)')
     for ax, t in zip(axs, 'ABCD'):
         ax.set_title(t, loc='left', fontweight='bold')
-    axs[3].text(0.03, 0.97, 'Labels give the number\nof words recalled', transform=axs[3].transAxes, va='top',
-                fontsize=7.5, color=INK2)
+    axs[3].set_title('by number recalled', loc='right', fontsize=7.5, color=INK2)
+    axs[3].set_ylim(0.8, 30)
+    axs[3].set_xlim(1.4, lo + partitions - 1 + 0.9)
     if title:
         fig.suptitle(f'{title} (N = {n})', x=0.07, ha='left', fontsize=9)
     return fig
