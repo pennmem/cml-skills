@@ -8,6 +8,7 @@ Claude Code skills for the Computational Memory Lab. Each top-level directory is
 |---|---|
 | [`neurorad-pipeline/`](neurorad-pipeline/) | Navigate, interpret, walk through, and debug the Neurorad iEEG localization pipeline on rhino2. |
 | [`grading-assignments/`](grading-assignments/) | Auto-grade COGS 4290 student notebooks against the DataSolutions-BIDS reference answers and explain how the approaches differed. |
+| [`peers/`](peers/) | Load, check and analyze the behavioral data of the five PEERS experiments (ltpFR, ltpFR2, VFFR) from the public release, with each experiment's methods and the lab's analysis and figure conventions. |
 
 *(Add new skills as sibling directories. Each one needs a `SKILL.md` at its root — see `skill-creator` if you're writing one.)*
 
