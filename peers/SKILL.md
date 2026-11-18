@@ -23,7 +23,7 @@ export PEERS_SKILL=$SK/peers PEERS_DATA=~/peers-data
 bash $PEERS_SKILL/scripts/fetch_peers.sh $PEERS_DATA       # behavioral files only: under a minute, about 1 GB
 PKGS="git+https://github.com/pennmem/pybeh git+https://github.com/pennmem/pybeh_pd"
 pip install -q $PKGS 2>/dev/null || pip install -q --break-system-packages $PKGS
-python $PEERS_SKILL/scripts/selftest.py --quick            # must end with ALL STRUCTURE CHECKS PASSED
+python3 $PEERS_SKILL/scripts/selftest.py --quick           # must end with ALL STRUCTURE CHECKS PASSED
 ```
 
 In Python, `sys.path.insert(0, f'{PEERS_SKILL}/scripts')`, then `import peers, peers_analysis as pa`. The first
@@ -46,8 +46,9 @@ Read the reference file for the experiment in question before analyzing it. Sess
 | 4 | ltpFR2 | 0-23 | Delayed free recall, 24 lists of 24 words, the same 576 words every session | `references/experiment-4.md` |
 | 5 | VFFR | 0-9 | Read each of the 576 words aloud; from session 5, ten minutes of recall at the start | `references/experiment-5.md` |
 
-Experiments 1-3 are one cohort of 20 sessions. All have end-of-session recognition and, in half the sessions,
-final free recall. If a request names no experiment, ask which, or say which you chose and why.
+Experiments 1-3 are one cohort of 20 sessions. Each of their sessions ends with a recognition test, preceded in
+about half the sessions by final free recall. If a request names no experiment, ask which, or say which you
+chose and why.
 
 Other references: `references/data.md` (files, columns, traps, how the public files differ from published
 samples), `references/analysis.md` (rules, functions, recipes), `references/figures.md`.
