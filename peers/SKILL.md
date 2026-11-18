@@ -1,6 +1,6 @@
 ---
 name: peers
-description: Load, check and analyze the behavioral data of the Penn Electrophysiology of Encoding and Retrieval Study (PEERS Experiments 1-5; lab task names ltpFR, ltpFR2, VFFR; OpenNeuro ds004395), with each experiment's methods, the file formats, pybeh, and Michael Kahana's conventions for analysis and figures. Use whenever PEERS, ltpFR, ltpFR2, VFFR or a numbered PEERS experiment comes up, or a free-recall analysis (serial position, lag-CRP, intrusions, inter-response times, recognition) is wanted on those data.
+description: Load, check and analyze the behavioral data of the PEERS experiments (1-5; ltpFR, ltpFR2, VFFR; OpenNeuro ds004395) with their methods, pybeh, and Michael Kahana's analysis and figure conventions. Use whenever PEERS, ltpFR, ltpFR2 or VFFR comes up, or a free-recall analysis is wanted on those data.
 ---
 
 # PEERS behavioral data
